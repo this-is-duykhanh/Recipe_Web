@@ -6,6 +6,8 @@ if (isset($_POST['submit'])) {
     $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
     $previous_thumbnail_name = filter_var($_POST['previous_thumbnail_name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $title = filter_var($_POST['title'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $description = filter_var($_POST['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
     $body = filter_var($_POST['body'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $category_id = filter_var($_POST['category'], FILTER_SANITIZE_NUMBER_INT);
     $is_featured = filter_var($_POST['is_featured'], FILTER_SANITIZE_NUMBER_INT);
@@ -15,7 +17,7 @@ if (isset($_POST['submit'])) {
     $is_featured = $is_featured == 1 ?: 0;
 
     // check and validate input values
-    if (!$title || !$category_id || !$body) {
+    if (!$title || !$category_id || !$body ||  !$description) {
         $_SESSION['edit-post'] = "Couldn't update post. Invalid form data on edit post page.";
     } else {
         //delete existing thumbnail if new thumbnail is available
@@ -63,7 +65,7 @@ if (isset($_POST['submit'])) {
         // set thumnail name if a new one was uploaded, else keep old thumbnail name
         $thumbnail_to_insert = $thumbnail_name ?? $previous_thumbnail_name;
         
-        $query = "UPDATE posts SET title='$title', body='$body', thumbnail='$thumbnail_to_insert', category_id=$category_id, is_featured=$is_featured WHERE id=$id LIMIT 1";
+        $query = "UPDATE posts SET title='$title', body='$body', descript='$description', thumbnail='$thumbnail_to_insert', category_id=$category_id, is_featured=$is_featured WHERE id=$id LIMIT 1";
         $result = mysqli_query($connection, $query);
     }
     

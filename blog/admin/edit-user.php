@@ -14,7 +14,7 @@ if(isset($_GET['id'])) {
 
 <section class="form__section">
     <div class="container form__section-container">
-        <h2>Edit User</h2>
+        <h2 style="color: var(--color-gray-700)">Edit User</h2>
         <form action="<?= ROOT_URL ?>admin/edit-user-logic.php" enctype="multipart/form-data" method="POST">
             <input type="hidden" value="<?= $user['id']?>" name="id">
             <input type="text" value="<?= $user['firstname']?>" name="firstname" placeholder="First Name">

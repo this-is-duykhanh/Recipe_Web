@@ -20,6 +20,7 @@ if(isset($_SESSION['user-id'])) {
     <!-- CUSTOM STYLESHEET -->
     <link rel="stylesheet" href="<?= ROOT_URL ?>css/style.css">
     <!-- ICONSCOUT CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <!-- GOOGLE FONTS (MONTSERRAT) -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -28,7 +29,7 @@ if(isset($_SESSION['user-id'])) {
 <body>
     <nav>
         <div class="container nav__container">
-            <a href="<?= ROOT_URL ?>" class="nav__logo">LONGVU</a>
+            <a href="<?= ROOT_URL ?>" class="nav__logo">WE RECIPE</a>
             <ul class="nav__items">
                 <li><a href="<?= ROOT_URL ?>blog.php">Blog</a></li>
                 <li><a href="<?= ROOT_URL ?>about.php">About</a></li>

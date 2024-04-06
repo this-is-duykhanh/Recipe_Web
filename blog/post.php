@@ -1,6 +1,11 @@
 <?php
 include 'partials/header.php';
 
+include './comments.inc.php';
+
+include './getLikePost.php';
+
+
 // fetch post from database if id is set
 if (isset($_GET['id'])) {
     $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
@@ -10,7 +15,10 @@ if (isset($_GET['id'])) {
 } else {
     header('location: ' . ROOT_URL . 'blog.php');
 }
+
 ?>
+    
+
 
 <section class="singlepost">
     <div class="container singlepost__container">
@@ -34,72 +42,36 @@ if (isset($_GET['id'])) {
                 </small>
             </div>
         </div>
+
         <div class="singlepost__thumbnail">
             <img src="./images/<?=$post['thumbnail']?>">
         </div>
-        <p>
-            <?= $post['body'] ?>
-        </p>
-    </div>
 
-    <div class="container singlepost__container">
-        <h2>Comments</h2>
-       
-        <div style="background-color: #fff; color: #000;">
-           
-            <div class="comment__input">
-                <form action="">
-                    <div style="font-size: 0.9rem; font-weight: bold;" class="comment__user">
-                        Long vu
-                    </div>
-        
-                    <input style="background-color: #fff ; color: #000;" type="text" id="submit" placeholder="Write something...">
-                    <button type="submit" class="btn">Submit</button>
-                </form>
-            </div>    
-        
-            <div class="comment__container" style="margin-top: 1rem;">
-                <div class="comment">
+            <div class="text__post">
+                <h4>Description</h4>
+                
+                
+                <ul>
+                    <?php
+                        
+                        $lines = explode("\n", trim($post['descript']));
+    
+                        foreach ($lines as $line) {
+                            echo "<li> $line </li>";
+                        }
+                    
+                    ?>
+                </ul>
+            </div>
+    
+            <div class="text__post">
+                <h4>How to cook?</h4>
+             
 
-                    <div style="height: 100%">
-                        <div style="background: url('./images/17117789592020-03-20-19-20-38.jpg');" class="comment__logo">
-                        </div>
-                    </div>
-
-                    <div class="comment__content">
-                        <div class="comment__content__header">
-                           
-                            <h5 style="color: var(--color-black);">Duy Khanh</h5>
-                            <small class="date-time">
-                                16 gio truoc
-                            </small>
-                        </div>
-                        <p style="margin-top: 0px;" class="comment__body">
-                            Lsumenda nisi erferendissdfgsdfgsd fsdgfsdg fdsgfsd s fsdgsdg fgsgsfdg asdfasdf dfaasdf đấ dà delectus ddddddddddddddddc
-                        </p>
-                    </div>
-                </div>
-
-                <div class="comment">
-                    <div style="background: url('./images/17117789592020-03-20-19-20-38.jpg');" class="comment__logo">
-                    </div>
-
-                    <div class="comment__content">
-                        <div class="comment__content__header">
-                           
-                            <h5 style="color: var(--color-black);">Duy Khanh</h5>
-                            <small class="date-time">
-                                16 gio truoc
-                            </small>
-                        </div>
-                        <p style="margin-top: 0px;" class="comment__body">
-                            Lsumenda nisi erferendis delectus ddddddddddddddddc
-                        </p>
-                    </div>
-                </div>
+                <p style="margin-left: 1.6rem;"> <?=nl2br($post['body']) ?> </p>
             </div>
 
-        </div>
+
     </div>
 
 </section>
@@ -107,7 +79,65 @@ if (isset($_GET['id'])) {
 
 
 
+
+
+<div class="container comment__container_form" id="comment__container_form">
+
+
+    <div id="getLike">
+        <?= getLike($connection, $id) ?>
+    </div>
+
+
+    <div class="download__pdf">
+        <form method="post" action="./downloadRecipe.php">
+            <input type="hidden" name="title" value="<?= $post['title'] ?>">
+            <input type="hidden" name="description" value="<?= $post['descript'] ?>">
+
+            <input type="hidden" name="body" value="<?= $post['body'] ?>">
+            <input type="hidden" name="thumbnail" value="<?= $post['thumbnail'] ?>">
+
+            <button type="submit" class="btn">Download Recipe</button>
+        </form>
+    </div>
+    
+
+    
+
+    <div id="getComment">
+
+        <?=getComments($connection, $id)?>
+    </div>
+</div>
+
+
+
 <!-- =========================== END OF SINGLE POST ============================= -->
+
+<script src="./js/main.js"></script>
+
+<script>
+function checkInput() {
+    var inputField = document.getElementById('comment');
+    var submitButton = document.getElementById('btn-comment');
+
+    var textarea = document.getElementById("comment");
+    var rowCount = textarea.value.split("\n").length;
+    textarea.rows = rowCount;
+
+    // Kiểm tra nếu ô input không trống
+    if (inputField.value.trim() !== '') {
+        // Kích hoạt nút
+        submitButton.disabled = false;
+    } else {
+        // Vô hiệu hóa nút
+        submitButton.disabled = true;
+    }
+
+
+}
+
+</script>
 
 <?php
 include 'partials/footer.php';

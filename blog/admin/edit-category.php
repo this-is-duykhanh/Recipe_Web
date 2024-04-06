@@ -16,7 +16,7 @@ if(isset($_GET['id'])) {
     
 
     <div class="container form__section-container">
-        <h2>Edit Category</h2>
+        <h2 style="color: var(--color-gray-700);">Edit Category</h2>
         <form action="<?= ROOT_URL ?>admin/edit-category-logic.php" method="POST">
             <input type="hidden" value="<?= $category['id'] ?>" name="id">
             <input type="text" name="title" value="<?= $category['title'] ?>" placeholder="Title">

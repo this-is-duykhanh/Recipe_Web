@@ -26,7 +26,7 @@ unset($_SESSION['signin-data']);
 
     <section class="form__section">
         <div class="container form__section-container">
-            <h2>Sign In</h2>
+            <h2 style="color: var(--color-gray-900)">Sign In</h2>
            
             <?php if (isset($_SESSION['signup-success'])) : ?>
                 <div class="alert__message success">
@@ -50,7 +50,7 @@ unset($_SESSION['signin-data']);
                 <input type="text" name="username_email" value="<?= $username_email ?>" placeholder="Username or Email">
                 <input type="password" name="password" value="<?= $password ?>" placeholder="Password">
                 <button type="submit" name="submit" class="btn">Sign In</button>
-                <small>Don't have an account? <a href="signup.php">Sign Up</a></small>
+                <small style="color: var(--color-primary)">Don't have an account? <a href="signup.php" style="font-weight: bold;">Sign Up</a></small>
             </form>
         </div>
     </section>

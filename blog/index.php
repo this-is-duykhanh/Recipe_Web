@@ -17,9 +17,11 @@ $posts = mysqli_query($connection, $query);
     <section class="featured">
         <div class="container featured__container">
             <div class="post__thumbnail">
-                <img src="./images/<?= $featured['thumbnail'] ?>">
-                
+                <a href="<?= ROOT_URL ?>post.php?id=<?= $featured['id'] ?>">
+                    <img src="./images/<?= $featured['thumbnail'] ?>">
+                </a>
             </div>
+            
             <div class="post__info">
                 <?php
                 // fetch category from categories table using category_id of post
@@ -47,7 +49,7 @@ $posts = mysqli_query($connection, $query);
                         <img src="images/<?= $avatar ?>">
                     </div>
                     <div class="post__author-info">
-                        <h5>By: <?= $author_name ?></h5>
+                        <h5 style="color: var(--color-black);" >By: <?= $author_name ?></h5>
                         <small>
                             <?= date("M d, Y - H:i", strtotime($featured['date_time'])) ?>
                         </small>
@@ -65,7 +67,11 @@ $posts = mysqli_query($connection, $query);
         <?php while ($post = mysqli_fetch_assoc($posts)) : ?>
             <article class="post">
                 <div class="post__thumbnail">
+
+                <a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>">
                     <img src="./images/<?= $post['thumbnail'] ?>">
+                </a>
+
                 </div>
                 <div class="post__info">
                     <?php
@@ -96,7 +102,7 @@ $posts = mysqli_query($connection, $query);
                             <img src="./images/<?= $avatar ?>">
                         </div>
                         <div class="post__author-info">
-                            <h5>By: <?= $author_name ?></h5>
+                            <h5 style="color: var(--color-black)">By: <?= $author_name ?></h5>
                             <small>
                                 <?= date("M d, Y - H:i", strtotime($post['date_time'])) ?>
                             </small>

@@ -4,6 +4,7 @@ require 'config/database.php';
 if(isset($_POST['submit'])) {
     $author_id = $_SESSION['user-id'];
     $title = filter_var($_POST['title'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $description = filter_var($_POST['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $body = filter_var($_POST['body'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $category_id = filter_var($_POST['category'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $is_featured = filter_var($_POST['is_featured'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -17,7 +18,10 @@ if(isset($_POST['submit'])) {
         $_SESSION['add-post'] = "Enter post title";
     } elseif (!$category_id){
         $_SESSION['add-post'] = "Select post category";
-    } elseif (!$body ){
+    } elseif (!$description ){
+        $_SESSION['add-post'] = "Enter post description";
+    } 
+     elseif (!$body ){
         $_SESSION['add-post'] = "Enter post body";
     } elseif(!$thumbnail['name']) {
         $_SESSION['add-post'] = "Choose post thumbnail";
@@ -35,11 +39,11 @@ if(isset($_POST['submit'])) {
         $extension = end($extension);
         if(in_array($extension, $allowed_files)){
             // make sure image is not to big. (2mb+)
-            if($thumbnail['size'] < 2000000){
+            if($thumbnail['size'] < 4000000){
                 // upload thumbnail
                 move_uploaded_file($thumbnail_tmp_name, $thumbnail_destination_path);
             } else {
-                $_SESSION['add-post'] = "File size too big. Should be less than 2mb";
+                $_SESSION['add-post'] = "File size too big. Should be less than 4mb";
             }
         } else {
             $_SESSION['add-post'] = "File should be png, jpn or jpeg";
@@ -58,8 +62,8 @@ if(isset($_POST['submit'])) {
             $zero_all_is_featured_result = mysqli_query($connection, $zero_all_is_featured_query);
         }
         // insert post into database
-        $query = "INSERT INTO posts (title, body, thumbnail, category_id, author_id, is_featured)
-                VALUES ('$title', '$body', '$thumbnail_name', '$category_id', '$author_id', '$is_featured')";
+        $query = "INSERT INTO posts (title, descript , body, thumbnail, category_id, author_id, is_featured)
+                VALUES ('$title', '$description' ,'$body', '$thumbnail_name', '$category_id', '$author_id', '$is_featured')";
         $result = mysqli_query($connection, $query);
 
         if(!mysqli_errno($connection)){

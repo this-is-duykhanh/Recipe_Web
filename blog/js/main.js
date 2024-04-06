@@ -43,3 +43,80 @@ showSidebarBtn.addEventListener('click', showSidebar);
 hideSidebarBtn.addEventListener('click', hideSidebar);
 
 
+function submitCommentForm() {
+    var formData = new FormData(document.getElementById("comment-form"));
+
+    // AJAX request to submit the form data
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            // On success, append the new comment to the comments section
+            var newComment = this.responseText;
+            document.getElementById("getComment").innerHTML = newComment;
+
+            document.getElementById("comment").value = ""; // Clear the comment input field
+        }
+    };
+
+
+    xhr.open("POST", "../setComment.php", true);
+    xhr.send(formData);
+}
+
+
+function deleteComment(element) {
+    var formData = new FormData(element);
+
+    // AJAX request to submit the form data
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            // On success, append the new comment to the comments section
+            var newComment = this.responseText;
+            document.getElementById("getComment").innerHTML = newComment;
+
+        }
+    };
+
+    xhr.open("POST", "../deleteComment.php", true);
+    xhr.send(formData);
+}
+
+
+
+function likeComment(element) {
+
+    // var likeValue = document.getElementById("icon__status")
+    
+    var formData = new FormData(element);
+
+
+    // AJAX request to submit the form data
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            // On success, append the new comment to the comments section
+            var newComment = this.responseText;
+            document.getElementById("getComment").innerHTML = newComment;
+        }
+    };
+
+    xhr.open("POST", "../likeComment.php", true);
+    xhr.send(formData);
+}
+
+
+function likePost(element) {
+    var formData = new FormData(element);
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            var newComment = this.responseText;
+            document.getElementById("getLike").innerHTML = newComment;
+        }
+    };
+
+    xhr.open("POST", "../likePost.php", true);
+    xhr.send(formData);
+}

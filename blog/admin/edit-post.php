@@ -19,7 +19,7 @@ if(isset($_GET['id'])) {
 
 <section class="form__section">
     <div class="container form__section-container">
-        <h2>Edit Post</h2>
+        <h2 style="color: var(--color-gray-700);" >Edit Post</h2>
         
         <form action="<?= ROOT_URL ?>admin/edit-post-logic.php" enctype="multipart/form-data" method="POST">
             <input type="hidden" name="id" value="<?=$post['id']?>">
@@ -30,13 +30,16 @@ if(isset($_GET['id'])) {
                     <option value="<?= $category['id']?>"><?=$category['title'] ?></option>
                 <?php endwhile ?>
             </select>
+
+            <textarea rows="10" name="description" placeholder="description"><?= $post['descript'] ?></textarea>
+
             <textarea rows="10" name="body" placeholder="Body"><?= $post['body'] ?></textarea>
             <div class="form__control inline">
                 <input type="checkbox" name="is_featured" id="is_featured" value="1" checked>
-                <label for="is_featured">Featured</label>
+                <label style="color: var(--color-black);" for="is_featured">Featured</label>
             </div>
             <div class="form__control">
-                <label for="thumbnail">Change Thumbnail</label>
+                <label style="color: var(--color-black);" for="thumbnail">Change Thumbnail</label>
                 <input type="file" name="thumbnail" id="thumbnail">
             </div>
 

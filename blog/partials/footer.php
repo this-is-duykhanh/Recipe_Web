@@ -50,7 +50,7 @@
         </article>
     </div>
     <div class="footer__copyright">
-        <small>Copyright &copy; 2024 LONGVU</small>
+        <small>Copyright &copy; 2024 GROUP5</small>
     </div>
 </footer>
 

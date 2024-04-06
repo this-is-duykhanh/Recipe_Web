@@ -15,7 +15,7 @@ unset($_SESSION['add-user-data']);
 
 <section class="form__section">
     <div class="container form__section-container">
-        <h2>Add User</h2>
+        <h2 style="color: var(--color-gray-700)">Add User</h2>
         <?php if (isset($_SESSION['add-user'])) : ?>
             <div class="alert__message error">
                 <p>
@@ -37,7 +37,7 @@ unset($_SESSION['add-user-data']);
                 <option value="1">Admin</option>
             </select>
             <div class="form__control">
-                <label for="avatar">User Avatar</label>
+                <label style="color: var(--color-gray-700)"  for="avatar">User Avatar</label>
                 <input type="file" name="avatar" id="avatar">
             </div>
             <button type="submit" name="submit" class="btn">Add User</button>

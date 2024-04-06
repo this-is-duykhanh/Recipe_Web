@@ -11,7 +11,7 @@ unset($_SESSION['add-category-data']);
 
 <section class="form__section">
     <div class="container form__section-container">
-        <h2>Add Category</h2>
+        <h2 style="color: var(--color-gray-700);">Add Category</h2>
 
         <?php if (isset($_SESSION['add-category'])) : ?>
             <div class="alert__message error">
